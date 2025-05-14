@@ -8,6 +8,12 @@ import io
 
 app = FastAPI()
 
+classes = [
+    '종이(paper)', '유리(glass)', '캔(can)', '배터리(battery)', '플라스틱(plastic)',
+    '의류(clothes)', '일반쓰레기(trash)', '음식물 쓰레기(food organic)',
+    '비닐(vinyl)', '스티로폼(styrofoam)'
+]
+
 # ✅ 로컬에서 .keras 모델 로드
 model = tf.keras.models.load_model("garbage_classification_test_model.keras")
 
@@ -23,10 +29,11 @@ async def predict(file: UploadFile = Form(...)):
         predictions = model.predict(image_array)
         class_id = int(np.argmax(predictions))
         confidence = float(np.max(predictions))
+        category = classes[class_id]
 
         return JSONResponse(content={
-            "category": str(class_id),  # 결과는 Spring에서 string으로 받아야 안전
-            "guide": confidence
+            "category": category,
+            "guide": f"정확도: {confidence:.2f}"
         })
 
     except Exception as e:
