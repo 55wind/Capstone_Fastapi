@@ -9,9 +9,9 @@ app = FastAPI()
 
 # 클래스 이름 리스트
 classes = [
-    '종이(paper)', '유리(glass)', '캔(can)', '배터리(battery)', '플라스틱(plastic)',
+    '종이(paper)', '유리(glass)', '캔(can)', '배터리(battery)', '스티로폼(styrofoam)',
     '의류(clothes)', '일반쓰레기(trash)', '음식물 쓰레기(food organic)',
-    '비닐(vinyl)', '스티로폼(styrofoam)'
+    '비닐(vinyl)', '플라스틱(plastic)'
 ]
 
 # 모델 로드
@@ -34,10 +34,8 @@ async def predict(file: UploadFile = File(...)):
         image_array = np.expand_dims(image_array, axis=0)
 
         predictions = model.predict(image_array)
-        class_id = int(np.argmax(predictions))
-        confidence = float(np.max(predictions))
-        category = classes[class_id]
-
+        category=np.argmax(predictions[0])
+        confidence = classes[category]
         last_result["category"] = category
         last_result["guide"] = f"{confidence:.2f}"
 
