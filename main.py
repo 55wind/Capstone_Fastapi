@@ -12,7 +12,7 @@ app = FastAPI()
 model = tf.keras.models.load_model("garbage_classification_test_model.keras")
 
 @app.post("/predict")
-async def predict(file: UploadFile, name: str = Form(...)):
+async def predict(file: UploadFile, nickname: str = Form(...)):
     try:
         image_bytes = await file.read()
         image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
@@ -25,7 +25,7 @@ async def predict(file: UploadFile, name: str = Form(...)):
         confidence = float(np.max(predictions))
 
         return JSONResponse(content={
-            "nickname": name,
+            "nickname": nickname,
             "category": str(class_id),  # 결과는 Spring에서 string으로 받아야 안전
             "guide": confidence
         })
