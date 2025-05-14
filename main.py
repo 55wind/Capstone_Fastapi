@@ -33,7 +33,7 @@ async def predict(file: UploadFile = Form(...)):
 
         return JSONResponse(content={
             "category": category,
-            "guide": f"정확도: {confidence:.2f}"
+            "guide": f"{confidence:.2f}"
         })
 
     except Exception as e:
