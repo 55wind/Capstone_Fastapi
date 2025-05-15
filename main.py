@@ -9,7 +9,7 @@ app = FastAPI()
 
 # 클래스 이름 리스트
 classes = [
-    '종이(paper)', '유리(glass)', '캔(can)', '배터리(battery)', '플라스틱(plastic)', '의류(clothes)', '일반쓰레기(trash)', '음식물 쓰레기(food organic)', '비닐(vinyl)', '스티로폼(styrofoam)'
+    '배터리(battery)', '비닐(vinyl)', '스티로폼(styrofoam)', '유리(glass)', '음식물 쓰레기(food organic)', '의류(clothes)', '일반쓰레기(trash)', '종이(paper)',  '캔(can)', '플라스틱(plastic)'
 ]
 
 # 모델 로드
