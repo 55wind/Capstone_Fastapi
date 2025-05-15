@@ -9,7 +9,7 @@ import json
 app = FastAPI()
 
 # 모델 로드
-model = tf.keras.models.load_model("garbage_classification_model.keras")
+model = tf.keras.models.load_model("garbage_classification_test_model.keras")
 
 # 클래스 인덱스 로드 (index → class name 매핑용)
 with open("class_indices.json", "r") as f:
